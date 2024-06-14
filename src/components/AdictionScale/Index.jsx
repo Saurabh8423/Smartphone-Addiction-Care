@@ -117,10 +117,10 @@ function Index() {
           }}
         >
           <option value="Select age">Select age...</option>
-          <option value="15-18 year">15-18 Year</option>
-          <option value="19-22 year">19-22 Year</option>
+          <option value="15-18 year">15-17 Year</option>
+          <option value="19-22 year">18-22 Year</option>
           <option value="23-25 year">23-25 Year</option>
-          <option value="25-above year">25-above Year</option>
+          <option value="25-above year">25 and Above</option>
         </select>
 
         <br />
