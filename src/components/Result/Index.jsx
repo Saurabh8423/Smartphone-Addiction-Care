@@ -26,7 +26,7 @@ function Index() {
       <h2 className='text-[#F1F2FF] font-[600] text-[25px]'>Reset</h2>
       <br />
       <p><Link className='font -[400] text-[16px] text-red-400' to="/addiction">Clear your score.</Link></p>
-      <MeterScale/>
+      {/* <MeterScale/> */}
     </div>
   )
 }
