@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import MeterScale from "../MeterScale/Index";
+import { useParams } from 'react-router-dom';
 
 function Index() {
+
+  const predictedScore = new URLSearchParams(window.location.search).get("predictedScore");
+
   return (
     <div className='w-1/2 flex flex-col justify-center items-center ml-[25%]'>
       <h2 className='text-[#F1F2FF] font-[600] text-[25px]'>
-        Your Nomophobia Score is <span className='text-red-400'>...</span> /50
+        Your Nomophobia Score is <span className='text-red-400'>{predictedScore}</span> /50
         </h2>
         <br />
 

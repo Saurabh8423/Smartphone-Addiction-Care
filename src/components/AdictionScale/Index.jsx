@@ -6,7 +6,7 @@ function Index() {
     Age: "",
     Gender: "",
     Time: "",
-    Symptoms: [],
+    Symptoms: "",
     Check_Social_Media: "",
     Boring_Studies: "",
     No_Fun: "",
@@ -20,11 +20,12 @@ function Index() {
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
     if (type === "checkbox") {
+      // Adjust handling of Symptoms as a comma-separated string
       setFormData((prevFormData) => ({
         ...prevFormData,
         Symptoms: checked
-          ? [...prevFormData.Symptoms, value]
-          : prevFormData.Symptoms.filter((symptom) => symptom !== value)
+          ? (prevFormData.Symptoms ? `${prevFormData.Symptoms}, ` : "") + name
+          : prevFormData.Symptoms.replace(new RegExp(`${name}, `, 'g'), '').replace(new RegExp(`${name}$`, 'g'), '')
       }));
     } else {
       setFormData((prevFormData) => ({
@@ -36,24 +37,25 @@ function Index() {
 
   async function submitHandler(event) {
     event.preventDefault();
+    console.log("formData: ", formData);
     try {
-      console.log("formData: ", formData);
-      const formattedFormData = {};
-      Object.keys(formData).forEach((key) => {
-        formattedFormData[key] = typeof formData[key] === "string" ? formData[key] : formData[key].join(", ");
+      const response = await axios.post("https://nomophobia-backend.onrender.com/predict", formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      const response = await axios.post("https://nomophobia-backend.onrender.com/predict", formattedFormData);
       const data = response.data;
-      setPredictedScore(data.predicted_score);
+      setPredictedScore(data.nomophobia_score);
+      window.location.href = `/result?predictedScore=${encodeURIComponent(data.nomophobia_score)}`;
     } catch (error) {
       console.error("Error predicting score:", error);
     }
   }
 
   return (
-    <div className="bg-[#000814] w-full h-screen mx-auto flex justify-center">
+    <div className="bg-[#000814] w-full h-screen mx-auto flex justify-center ">
       <form onSubmit={submitHandler}>
-      <br />
+        <br />
         <fieldset>
           <legend className="text-[#F1F2FF] font-[600] text-[18px] leading-[34px]">
             What is your gender:<sup className="text-pink-400">*</sup>
@@ -116,18 +118,17 @@ function Index() {
             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
           }}
         >
-          <option value="Select age">Select age...</option>
-          <option value="15-18 year">15-17 Year</option>
-          <option value="19-22 year">18-22 Year</option>
-          <option value="23-25 year">23-25 Year</option>
-          <option value="25-above year">25 and Above</option>
+          <option value="">Select age...</option>
+          <option value="15-17 Years">15-17 Years</option>
+          <option value="18-22 Years">18-22 Years</option>
+          <option value="23-25 Years">23-25 Years</option>
+          <option value="25 and Above">25 and Above</option>
         </select>
 
         <br />
         <br />
         <hr className="border border-[#AFB2BF] " />
         <br />
-
         <label
           htmlFor="time"
           className="text-[#F1F2FF] font-[600] text-[18px] leading-[30px]"
@@ -146,13 +147,13 @@ function Index() {
             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
           }}
         >
-          <option value="Select time">Select time...</option>
+          <option value="">Select time...</option>
           <option value="0-2 hours">0-2 hours</option>
           <option value="3-4 hours">3-4 hours</option>
           <option value="5-7 hours">5-7 hours</option>
           <option value="8-10 hours">8-10 hours</option>
           <option value="11-13 hours">11-13 hours</option>
-          <option value="14 and above hours">14 and Above</option>
+          <option value="14 and above">14 and Above</option>
         </select>
 
         <br />
@@ -166,14 +167,14 @@ function Index() {
           <div className="flex flex-row space-x-2 space-y-3">
             <input
               type="checkbox"
-              id="headAche"
-              name="headAche"
-              value={formData.HeadAche}
+              id="HeadAche"
+              name="Headache"
+              value="Headache"
               onChange={changeHandler}
               className="mt-3"
             />
             <div className="text-[#AFB2BF] text-[16px] leading-[24px] font-[500]">
-              <label htmlFor="checkbox">HeadAche</label>
+              <label htmlFor="HeadAche">HeadAche</label>
             </div>
           </div>
 
@@ -181,25 +182,25 @@ function Index() {
             <input
               type="checkbox"
               id="Eyeproblem"
-              name="Eyeproblem"
-              value={formData.Eyeproblem}
+              name="Eye Problem"
+              value="Eye Problem"
               onChange={changeHandler}
             />
             <div className="text-[#AFB2BF] text-[16px] leading-[24px] font-[500]">
-              <label htmlFor="checkbox">Eye Problem</label>
+              <label htmlFor="Eyeproblem">Eye Problem</label>
             </div>
           </div>
 
           <div className="flex flex-row space-x-2">
             <input
               type="checkbox"
-              id="frustation"
-              name="frustation"
-              value={formData.Frustation}
+              id="Frustrated"
+              name="Frustrated"
+              value="Frustrated"
               onChange={changeHandler}
             />
             <div className="text-[#AFB2BF] text-[16px] leading-[24px] font-[500]">
-              <label htmlFor="checkbox">Frustation</label>
+              <label htmlFor="Frustrated">Frustrated</label>
             </div>
           </div>
 
@@ -207,12 +208,12 @@ function Index() {
             <input
               type="checkbox"
               id="anxiety"
-              name="anxiety"
-              value={formData.Anxiety}
+              name="Anxiety"
+              value="Anxiety"
               onChange={changeHandler}
             />
             <div className="text-[#AFB2BF] text-[16px] leading-[24px] font-[500]">
-              <label htmlFor="checkbox">Anxiety</label>
+              <label htmlFor="Anxiety">Anxiety</label>
             </div>
           </div>
 
@@ -220,24 +221,24 @@ function Index() {
             <input
               type="checkbox"
               id="fever"
-              name="fever"
-              value={formData.Fever}
+              name="Fever"
+              value="Fever"
               onChange={changeHandler}
             />
             <div className="text-[#AFB2BF] text-[16px] leading-[24px] font-[500]">
-              <label htmlFor="checkbox">Fever</label>
+              <label htmlFor="fever">Fever</label>
             </div>
           </div>
           <div className="flex flex-row space-x-2">
             <input
               type="checkbox"
               id="other"
-              name="other"
-              value={formData.Other}
+              name="Others"
+              value="Others"
               onChange={changeHandler}
             />
             <div className="text-[#AFB2BF] text-[16px] leading-[24px] font-[500]">
-              <label htmlFor="checkbox">Other</label>
+              <label htmlFor="other">Other</label>
             </div>
           </div>
         </fieldset>
@@ -438,12 +439,13 @@ function Index() {
           Submit
         </button>
       </form>
-      {predictedScore && (
-        <div>
+      {/* {predictedScore && (
+        <div className="border border-red-50">
           <h2>Predicted Nomophobia Score: {predictedScore}</h2>
         </div>
-      )}
+      )} */}
     </div>
+    
   );
 }
 
