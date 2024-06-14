@@ -42,7 +42,7 @@ function Index() {
       Object.keys(formData).forEach((key) => {
         formattedFormData[key] = typeof formData[key] === "string" ? formData[key] : formData[key].join(", ");
       });
-      const response = await axios.post("/predict", formattedFormData);
+      const response = await axios.post("https://nomophobia-backend.onrender.com/predict", formattedFormData);
       const data = response.data;
       setPredictedScore(data.predicted_score);
     } catch (error) {
