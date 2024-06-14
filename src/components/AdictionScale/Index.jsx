@@ -152,7 +152,7 @@ function Index() {
           <option value="5-7 hours">5-7 hours</option>
           <option value="8-10 hours">8-10 hours</option>
           <option value="11-13 hours">11-13 hours</option>
-          <option value="14 and above hours">14-above hours</option>
+          <option value="14 and above hours">14 and Above</option>
         </select>
 
         <br />
