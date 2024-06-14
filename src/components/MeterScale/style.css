@@ -1,0 +1,74 @@
+.meter-container {
+    width: 300px;
+    margin: 20px auto;
+    position: relative;
+  }
+  
+  .slider {
+    width: 100%;
+  }
+  
+  .meter {
+    position: relative;
+    height: 40px;
+    margin-top: 10px;
+  }
+  
+  .scale {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 10px;
+  }
+  
+  .range {
+    position: absolute;
+    height: 100%;
+  }
+  
+  .green {
+    left: 0;
+    width: 20%;
+    background-color: green;
+  }
+  
+  .yellow {
+    left: 20%;
+    width: 10%;
+    background-color: yellow;
+  }
+  
+  .orange {
+    left: 30%;
+    width: 10%;
+    background-color: orange;
+  }
+  
+  .red {
+    left: 40%;
+    width: 60%;
+    background-color: red;
+  }
+  
+  .needle {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: black;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+  
+  .needle .inner {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    top: -5px;
+    left: -4px;
+    border-radius: 50%;
+  }
+  
