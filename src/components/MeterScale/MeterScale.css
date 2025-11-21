@@ -1,0 +1,37 @@
+.meter-container { animation: fadeIn 0.8s ease; }
+
+.slider {
+  -webkit-appearance: none;
+  height: 10px;
+  border-radius: 999px;
+  outline: none;
+  transition: background 300ms ease;
+}
+
+/* thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  border: 3px solid rgba(255,255,255,0.85);
+  cursor: default;
+}
+
+/* Firefox */
+.slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* small fadeIn animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

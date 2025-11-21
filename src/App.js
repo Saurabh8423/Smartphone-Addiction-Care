@@ -1,21 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import Home from "./components/Home/Index.jsx";
-import Addiction from "./components/AdictionScale/Index.jsx";
-import Contact from "./components/Contact/Index.jsx";
-import Strategies from "./components/Strategies/Index.jsx";
-import Result from "./components/Result/Index.jsx";
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './components/Home/Home.jsx';
+import Addiction from './components/AdictionScale/AdictionScale.jsx';
+import Strategies from './components/Strategies/Strategies.jsx';
+import Contact from './components/Contact/Contact.jsx';
+import Result from './components/Result/Result.jsx';
 
-const App = () => {
-  return (
-      <Routes>
-        <Route exact path='/' element={<Home/>}/>
-        <Route exact path='/addiction' element={<Addiction/>}/>
-        <Route exact path='/strategies' element={<Strategies/>}/>
-        <Route exact path='/contact' element={<Contact/>}/>
-        <Route exact path='/result' element={<Result/>}/>
-      </Routes>
-  )
+
+export default function App(){
+return (
+<div className="min-h-screen flex flex-col bg-[#000814] text-[#F1F2FF]">
+<Navbar />
+<main className="flex-1 py-8">
+<Routes>
+<Route path="/" element={<Home/>} />
+<Route path="/addiction" element={<Addiction/>} />
+<Route path="/strategies" element={<Strategies/>} />
+<Route path="/contact" element={<Contact/>} />
+<Route path="/result" element={<Result/>} />
+</Routes>
+</main>
+<Footer />
+</div>
+)
 }
-
-export default App

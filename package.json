@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
+    "lucide-react": "^0.554.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
@@ -42,5 +43,5 @@
   "devDependencies": {
     "tailwindcss": "^3.4.3"
   },
-  "proxy":"http://192.168.29.227:3000"
+  "proxy": "http://192.168.29.227:3000"
 }
