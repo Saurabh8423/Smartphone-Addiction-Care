@@ -63,14 +63,6 @@ export default function Strategies() {
         </section>
 
         {/* ITEM 3 */}
-        <section id="sleep" className="strategy-card fade-up">
-          <h3 className="strategy-title"><Moon size={24}/> Keep Phone Away at Night</h3>
-          <p className="text-[#AFB2BF]">
-            A phone-free bedroom improves sleep quality and reduces late-night scrolling.
-          </p>
-        </section>
-
-        {/* ITEM 4 */}
         <section id="grey" className="strategy-card fade-up">
           <h3 className="strategy-title"><EyeOff size={24}/> Use Greyscale Mode</h3>
           <p className="text-[#AFB2BF]">
@@ -83,6 +75,14 @@ export default function Strategies() {
               Android → Digital Wellbeing → Bedtime Mode
             </div>
           </details>
+        </section>
+
+        {/* ITEM 4 */}
+        <section id="sleep" className="strategy-card fade-up">
+          <h3 className="strategy-title"><Moon size={24}/> Keep Phone Away at Night</h3>
+          <p className="text-[#AFB2BF]">
+            A phone-free bedroom improves sleep quality and reduces late-night scrolling.
+          </p>
         </section>
 
         {/* ITEM 5 */}
