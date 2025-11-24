@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./AdictionScale.css";
 
-function Index() {
+
+function AdictionScale() {
   const [formData, setFormData] = useState({
     Age: "",
     Gender: "",
@@ -47,7 +47,6 @@ function Index() {
       );
 
       const data = response.data;
-
       setPredictedScore(data.nomophobia_score);
 
       setTimeout(() => {
@@ -61,57 +60,47 @@ function Index() {
   }
 
   return (
-    <div className="w-full py-2 mb-20 flex justify-center animate-fadeIn">
+    <div className="w-full py-2 mb-40 flex justify-center animate-fadeIn">
 
-      {/* Score Popup */}
+      {/*  POPUP */}
       {predictedScore !== null && (
-        <div className="w-full fixed top-4 left-0 flex justify-center z-50">
-          <div className="bg-[#FFD60A] text-black px-6 py-3 rounded-xl font-semibold shadow-lg animate-scorePopup">
+        <div className="fixed top-4 left-0 w-full flex justify-center z-50">
+          <div className="bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold shadow-lg animate-slideDown">
             Your nomophobia score: {predictedScore}
           </div>
         </div>
       )}
 
+      {/*  FORM CARD */}
       <form
         onSubmit={submitHandler}
-        className="w-[95%] md:w-[720px] bg-[#0A1128] p-8 rounded-2xl card-glow border border-[#1d2540] space-y-6"
+        className="w-[95%] md:w-[720px] bg-[#0A1128] p-8 rounded-2xl border border-[#1d2540] shadow-[0_0_20px_rgba(49,103,130,0.4)] space-y-6"
       >
-        <h2 className="text-center text-2xl font-bold text-[#FFD60A]">
+        <h2 className="text-center text-2xl font-bold text-yellow-400">
           Nomophobia Addiction Scale
         </h2>
 
         {/* Gender */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <label className="text-lg font-semibold text-white">
             What is your gender? <sup className="text-pink-400">*</sup>
           </label>
 
-          <div className="flex gap-6">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="Gender"
-                value="Male"
-                checked={formData.Gender === "Male"}
-                onChange={changeHandler}
-                className="focus-glow"
-                required
-              />
-              Male
-            </label>
-
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="Gender"
-                value="Female"
-                checked={formData.Gender === "Female"}
-                onChange={changeHandler}
-                className="focus-glow"
-                required
-              />
-              Female
-            </label>
+          <div className="flex gap-6 text-white">
+            {["Male", "Female"].map((g) => (
+              <label key={g} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="Gender"
+                  value={g}
+                  checked={formData.Gender === g}
+                  onChange={changeHandler}
+                  className="w-4 h-4 accent-yellow-400 focus:ring-yellow-400"
+                  required
+                />
+                {g}
+              </label>
+            ))}
           </div>
         </div>
 
@@ -119,6 +108,7 @@ function Index() {
 
         {/* Age + Time */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Age */}
           <div>
             <label className="font-semibold text-white">Age</label>
             <select
@@ -126,7 +116,7 @@ function Index() {
               value={formData.Age}
               onChange={changeHandler}
               required
-              className="animated-input w-full"
+              className="w-full bg-[#131a33] text-[#AFB2BF] p-3 rounded-xl border border-[#1d2540] shadow transition hover:scale-[1.02] focus:scale-[1.03] focus:border-yellow-400 focus:shadow-[0_0_12px_#FFD60A] outline-none"
             >
               <option value="">Select age...</option>
               <option value="15-17 Years">15-17 Years</option>
@@ -136,6 +126,7 @@ function Index() {
             </select>
           </div>
 
+          {/* Time */}
           <div>
             <label className="font-semibold text-white">Time</label>
             <select
@@ -143,15 +134,12 @@ function Index() {
               value={formData.Time}
               onChange={changeHandler}
               required
-              className="animated-input w-full"
+              className="w-full bg-[#131a33] text-[#AFB2BF] p-3 rounded-xl border border-[#1d2540] shadow transition hover:scale-[1.02] focus:scale-[1.03] focus:border-yellow-400 focus:shadow-[0_0_12px_#FFD60A] outline-none"
             >
               <option value="">Select time...</option>
-              <option value="0-2 hours">0-2 hours</option>
-              <option value="3-4 hours">3-4 hours</option>
-              <option value="5-7 hours">5-7 hours</option>
-              <option value="8-10 hours">8-10 hours</option>
-              <option value="11-13 hours">11-13 hours</option>
-              <option value="14 and above">14 and Above</option>
+              {["0-2 hours", "3-4 hours", "5-7 hours", "8-10 hours", "11-13 hours", "14 and above"].map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -162,12 +150,12 @@ function Index() {
 
           <div className="grid grid-cols-2 gap-2 mt-2 text-[#AFB2BF]">
             {["Headache", "Eye Problem", "Frustrated", "Anxiety", "Fever", "Others"].map((s) => (
-              <label key={s} className="flex items-center gap-2 animated-input">
+              <label key={s} className="flex items-center gap-2 bg-[#131a33] p-2 rounded-lg border border-[#1d2540] hover:scale-[1.02] transition">
                 <input
                   type="checkbox"
                   name={s}
                   onChange={changeHandler}
-                  className="focus-glow"
+                  className="w-4 h-4 accent-yellow-400"
                 />
                 {s}
               </label>
@@ -175,13 +163,9 @@ function Index() {
           </div>
         </div>
 
-        {/* All Questions */}
+        {/* Questions */}
         {[
-          {
-            label:
-              "I find it essential to check social media feeds every 10-15 minutes",
-            name: "Check_Social_Media",
-          },
+          { label: "I find it essential to check social media feeds every 10-15 minutes", name: "Check_Social_Media" },
           { label: "I find my studies boring and feel pressure", name: "Boring_Studies" },
           { label: "I do not get fun with family/friends", name: "No_Fun" },
           { label: "I spend more time on social networking sites", name: "Skip_Activities" },
@@ -196,21 +180,20 @@ function Index() {
               value={formData[item.name]}
               onChange={changeHandler}
               required
-              className="animated-input w-full"
+              className="w-full bg-[#131a33] text-[#AFB2BF] p-3 rounded-xl border border-[#1d2540] shadow transition hover:scale-[1.02] focus:scale-[1.03] focus:border-yellow-400 focus:shadow-[0_0_12px_#FFD60A] outline-none"
             >
               <option value="">Select...</option>
-              <option value="Strongly Agree">Strongly Agree</option>
-              <option value="Agree">Agree</option>
-              <option value="Neutral">Neutral</option>
-              <option value="Disagree">Disagree</option>
-              <option value="Strongly Disagree">Strongly Disagree</option>
+              {["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"].map((x) => (
+                <option key={x} value={x}>{x}</option>
+              ))}
             </select>
           </div>
         ))}
 
+        {/* Button */}
         <button
           type="submit"
-          className="w-full bg-[#FFD60A] text-black py-3 rounded-xl font-semibold animated-input"
+          className="w-full bg-yellow-400 text-black py-3 rounded-xl font-semibold shadow hover:scale-[1.02] active:scale-[0.97] transition"
         >
           Submit
         </button>
@@ -219,4 +202,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default AdictionScale;

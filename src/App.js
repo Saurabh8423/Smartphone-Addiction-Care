@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Footer from './components/Footer.jsx';
 import Home from './components/Home/Home.jsx';
 import Addiction from './components/AdictionScale/AdictionScale.jsx';
 import Strategies from './components/Strategies/Strategies.jsx';
